@@ -1,0 +1,4 @@
+Removed headers:
+
+History-Info
+User-to-User

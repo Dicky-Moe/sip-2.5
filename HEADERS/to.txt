@@ -1,0 +1,8 @@
+To: Header
+Content: display name (optional) and URI (required, AOR). No parameters allowed, unlike SIP 2.0 which allowes a "tag".
+Usage: 
+ initial request: required, once;
+ subsequent request: optional;
+ response: optional, once, but see note.
+Note: For 181 response, this header makes no sense and is not allowed. For 180, 182, and final responses to an initial request, this header is required and indicates the sending UAS. For responses to subsequent requests, this header is optional (and unlikely).
+183 response might come from the UAS (as 180, 182) or not (as 181).

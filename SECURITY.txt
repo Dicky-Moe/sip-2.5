@@ -1,0 +1,4 @@
+Security Considerations
+
+Since shift from SIP 2.0 to SIP 2.5 is minor, all considerations still apply. In principle, smaller messages reduce load to network, memory, processors, so denial-of-service attack becomes less probable with the same number of messages.
+Caller authentication is not covered by these specifications.

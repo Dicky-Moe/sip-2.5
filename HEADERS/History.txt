@@ -1,0 +1,17 @@
+Header: History
+
+This header maintains information about the call as it was forwarded in reasonable way.
+
+Fields: forwarder-name (implicit), forwarder-URI (implicit, REQUIRED), reason (optional), date (optional).
+
+Syntax: INVITE and similar requests
+For requests with call semantics (e.g. SUBSCRIBE): multiple headers are allowed, normally folded into comma-separated list, in chronological order.
+
+Syntax: 181 responses
+Only 1 entry is allowed.
+
+Syntax: 3xx responses
+Not allowed. Information is passed elsewhere i.e. To:, Reason:, Date: headers.
+
+Syntax: other responses
+Not allowed.

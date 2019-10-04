@@ -1,0 +1,14 @@
+Method: NOTIFY
+
+This method remains from SIP 2.0. The difference is that Event: header is not supported in requests or responses. In addition, implicit subscription (forbidden for SIP 2.0 by RFC 6665) is defined here.
+
+An implicit subscription is allowed only by event-package definition. A request is considered implicit-subscription if it does not match existing subscription-dialog; that is, appears out-of dialog (no di-llac: header), in an INVITE-dialog, or even in a SUBSCRIBE-dialog in the wrong direction. In all these cases, Event: header is REQUIRED.
+
+Notifier generation of NOTIFY requests (implicit-subscription)
+As defined elsewhere.
+
+Subscriber processing of NOTIFY requests (implicit-subscription)
+In this case, a subscriber is not expected to take any particular action. However, it is still required to generate a syntactically valid response (in particular, no Event: header in response). It MAY indicate errors in :status, but also may just return 2xx for security reasons.
+
+Notifier processing of NOTIFY responses (implicit-subscription)
+Nothing to do here.

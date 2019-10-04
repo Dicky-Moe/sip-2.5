@@ -1,0 +1,7 @@
+From: Header
+Content: display name (optional) and URI (required, AOR). No parameters allowed, unlike SIP 2.0 which requires a "tag".
+Usage: 
+ request: optional;
+ response: not allowed (it makes no sense).
+
+Note: this header is optional even for an initial request, INQUIRE could be invoked.

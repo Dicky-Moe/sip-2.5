@@ -1,0 +1,8 @@
+Di-llac: Header
+Note: "Call-id" backwards.
+Content: string.
+Usage: 
+ initial request: not allowed; (this is actually the marker of initial vs. subsequent request)
+ subsequent request: required, once;
+ response: required, once.
+The pair of call-id: and di-llac: is the dialog-id.

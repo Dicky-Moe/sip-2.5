@@ -1,0 +1,89 @@
+Letter by 2013-08-26:
+Hello All,
+Maybe this is wrong WG (sipcore would be better). But I have some notes on
+SIP (and VoIP in general) future development. At least I want that. I dare
+even to say that telephone wasn't invented by Bell; it is uninvented yet.
+;)
+
+1. Support for call pick-up, and other remote call control (remote call
+rejection, remote answering).
+ Note: I am working on an I-D for this (over 25 years...). I suggest a new
+method, PICKUP.
+One more note: call pick-up is specified for H.323 (H.450.5), and DPNSS1
+defines all remote call control. 2. Easy conferences without any
+supporting infrastructure, similar to H.323, as opposed to RFC 4575etc. No
+way to join a SIP conference in the same way as H.323. Note: may require
+to normatively update existing RFCs. 3. Standard call management codes, as
+GSM USSD. 4. Tons of headers, with arbitrary grouping of parameters (see
+my earlier post on From: and To:), and redundancy. Example: transaction-id
+in Via: header and a pair of dialog-id, CSeq, which also uniquely
+indentifies a transaction. 5. Overload of INVITE with much potentially
+unused data (e.g. Caller-name when it is not displayed). The same is true
+for SS7 and H.323. Proposed solution: inquire some data only when needed;
+specify an Info-package for this. 6. D-channel bearer equivalent. I guess
+it is really undesired. Or, specify an Info-package. 7. True P2P (no
+infrastructure). Based on IP multicast.This is out of scope of current
+P2PSIP WG.
+
+Any comments? Clearly, 4 is for next versions of SIP (if ever), maybe 6G
+(tm).
+
+
+Letter by 2013-09-02:
+Hello All,
+Thanks to everybody who answered.
+Let me go into details.
+I define "telephony" as real-time inter-personal communication. By SIP, I
+mean a protocol family, not the protocol. 
+>[MB]  There have been proposals
+for call park and call pickup. You can see here why the work was not
+progressed: http://www.ietf.org/mail-archive/web/bliss/current/msg01107.html 
+
+As I understand that message, authors of some I-D withdrew their proposal. The
+same for another I-D. I don't think that binds me. "No one implements"
+does not sound as a reasonable argument for me. I cannot use it because no
+one implements, no one implements because no one uses. For conferences,
+SIP requires conference URI. For that, there must be routing function
+recognizing them and routing requests to appropriate focus, focus service
+itself, conference factory that allocates and assigns conference URIs, at
+least. In P2P scenarios, nothing of this would be available. Suppose
+someone (Alice?)  starts a conference. Anyone wishing to join knows only
+Alice's address. Currently, in H.323, this is sufficient, but not in SIP,
+as there is no way to indicate "join". More to come... 
+Sincerely yours,
+Anton.
+
+
+Letter by 2019-09-04:
+RFC 3911 requires a conference URI. This implies that
+1) there is one;
+2) this URI is known to the caller beforehand.
+
+My original idea was to send Join: without URI (and normatively update RFC
+3911 for that). Anyway, IMO some (syntax level) indication needed to
+indicate that an INVITE is a request to join rather than just a call. Even
+though such an INVITE contains no session description. Actually, this
+might mean 3pcc.
+
+----- Original Message ----- 
+From: "Hadriel Kaplan" <hadriel.kaplan@oracle.com>
+To: "Anton Tveretin" <fas_vm@surguttel.ru>
+Cc: <dispatch@ietf.org>
+Sent: Tuesday, September 03, 2013 5:47 AM
+Subject: Re: [dispatch] SIP Problem Statement
+
+
+>
+> On Sep 2, 2013, at 1:59 PM, Anton Tveretin <fas_vm@surguttel.ru> wrote:
+>
+>> Suppose someone (Alice?)  starts a conference. Anyone wishing to join
+>> knows only Alice's address. Currently, in H.323, this is sufficient,
+>> but not in SIP, as there is no way to indicate "join".
+>
+> Ummm... RFC 3911?
+> http://tools.ietf.org/html/rfc3911
+>
+> -hadriel
+>
+>
+> 

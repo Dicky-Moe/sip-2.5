@@ -1,0 +1,11 @@
+Method: INQUIRE
+
+This method is intended to get any information about the call which was not passed in the original request. Which information should be passed in original requests, and which should not, is FFS.
+
+The body or the first non-header part of the request MUST be text listing all needed headers, option-tags etc. comma-separated. Proxies MUST NOT modify this list in any way.
+The INQUIRE request is normally used in-dialog, but its use out-dialog is allowed, for instance, for advice-of-charge. In that way, the request MUST NOT be forked.
+
+Any headers and parts are allowed in the request.
+Note: this in case proxies add information they hold which is not kept by UAS.
+
+A compliant UAS MUST return the 200 response, even requested information does not exist or not available. It should still treat syntax errors as errors, however.

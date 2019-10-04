@@ -1,0 +1,4 @@
+Methods
+
+SIP 2.5 reuses the same methods with their semantics as in SIP 2.0 unless specified otherwise. In addition, the new method is introduced, INQUIRE.
+FYI list: ACK, ANSWER, BYE, CANCEL, INFO, INVITE, MESSAGE, NOTIFY, OPTIONS, PICKUP, PRACK, PUBLISH, REFER, REGISTER, REJECT, SUBSCRIBE, UPDATE.

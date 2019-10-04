@@ -1,0 +1,51 @@
+Protocol Stack Description (PrSD)
+
+This is a replacement for the Session Description Protocol (SDP). It is designed for simplicity, and non-IP bearers (such as Hybrid Transfer Mode). 
+
+Each stream description consists of protocol names, each followed by protocols parameters (if any), separated by a slash (/).
+Stream descriptions are separated by CRLF.
+Protocols are written top down.
+Protocol parameters are enclosed in parentheses (), consist of name=value pairs, separated with commas (,).
+Predefined parameters are: 
+ l - local address (for network or transport protocols),
+ l1 - auxillary local address (e.g. RTCP for RTP),
+ r - remote address,
+ r1 - auxillary remote address,
+ b - bandwidth,
+ k - encryption key.
+ 
+Top level protocols (i.e. the first in each stack) is actually a stream major type; it does not define any format or encoding. Common types are audio, video; other registered types are application, control, image, message, text.
+
+Known protocols are:
+ rtp (parameter: pt)
+ srtp
+ tls
+ tcp
+ udp
+ sctp
+ ip4
+ ip6
+ ipx
+ ipsec
+ aal0
+ aal1
+ aal2
+ aal34
+ aal5
+ 
+In addition, "*" pseudo-stack is used to define global parameters:
+ b (see above)
+ s - subject (e.g. conference)
+ t - time and repetition
+ 
+Example:
+ audio/pcma/rtp(pt=8)/udp(l=13000,r=14000,l1=13001)/ip6(l=2001::1234)
+ 
+Known subtypes are:
+audio/*
+video/*
+application/bfcp
+application/l2tp
+image/t38
+message/msrp
+text/t140 

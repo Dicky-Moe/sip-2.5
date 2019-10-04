@@ -1,0 +1,33 @@
+Session Initiation Protocol (SIP) Version 2.5
+
+Each implementation MUST provide quality of service to real-time traffic, e.g. use RSVP, MPLS, or non-IP bearer. Those who do not are non-compliant. 
+
+Design goals:
+Maintain maximum compatibility with SIP 2.0 so it allows code reuse.
+Get rid of unlucky solutions ("implementation-driven") of SIP 2.0, including XML.
+Extend functionality to H.323 and beyond.
+Add consisitency with HTTP/2.
+
+SIP 2.5 Message:
+Each message consists of parts, separated by the ASCII End-of-text character, and the message itself is terminated by the ASCII End-of-transmission character.
+Discussion: control characters are chosen rather arbitrarily.
+The first part in called the header part. It begins with the version field, followed by OPTIONAL Request-URI. The rest consists of headers.
+Note: the use of the terms "header", "header field" is consistent with HTTP and other protocols, but not SIP 2.0. 
+
+Version:
+It is "SIP/2.5". It is followed by a space, if the Request-URI is present, or CRLF otherwise.
+
+Request-URI:
+It may be a URI-dictionary-reference, or a valid URI (normally RoA). It is followed by CRLF.
+
+Headers:
+Headers keep syntax and semantics of SIP 2.0 unless removed, or amended, or added by these specifications. It may be also ":status", defined in HTTP/2, or URI-dictionary-entry. The header name may be replaced by compact binary form [SIGCOMP].
+
+URI-Dictionary:
+SIP naturally reuses the same URI in several headers. To keep a message compact, a dictionary is introduced. Each index is defined as &0...&9. An entry is defined as a header whose name is the index, and whose value is the actual URI. An index is used in header values and the Request-URI where a URI is expected, and is substituted. Implementations MUST provide entries for all indices used, MUST NOT provide unused entries, SHOULD generate entries only if a URI is used at least twice.
+
+Requests and Responses:
+SIP 2.5 message that contains :status header is a response, otherwise it is a request. A response MUST NOT contain Request-URI. For requests without a Request-URI, an implementation MUST treat To-URI (i.e. the URI from the To: header) as such, if present. Otherwise, get one by some external means, as in P2P scenarios. 
+
+Other parts of a message:
+Other parts of a message MAY have any text or binary format except XML, but including SIP 2.5 or SIP 2.0. Metainformation is given in the header part in content headers (e.g. Content-Type, Content-Disposition, Content-Length), each header repeats as many times as parts there, SHOULD be folded. Any inconsistency (number of parts do not match between different headers or with actual number of parts) may lead to undefined behaviour. Each method MAY define some default type and disposition for the request and each response class.
