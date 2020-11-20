@@ -2,20 +2,30 @@ Protocol Stack Description (PrSD)
 
 This is a replacement for the Session Description Protocol (SDP). It is designed for simplicity, and non-IP bearers (such as Hybrid Transfer Mode). 
 
-Each stream description consists of protocol names, each followed by protocols parameters (if any), separated by a slash (/).
-Stream descriptions are separated by CRLF.
-Protocols are written top down.
-Protocol parameters are enclosed in parentheses (), consist of name=value pairs, separated with commas (,).
-Predefined parameters are: 
+A protocol parameter is a name=value pair. Names are protocol-specific, though there are few (see below) designed for use with miltiple protocols.
+
+A protocol entry consists of a protocol name (a token) with optional parameter list. The list consists of parentheses () with comma-separated parameters inside.
+BUGBUG: This implies that spaces are not used as separators. Should we allow them inside parameter values?
+
+A major media type is token-only (no parameters).
+
+A media stream descriptor consists of:
+# optional (?) direction flag: "+" both, "|" forward, "\" backward, "-" none;
+# major media type;
+# "/"-separated protocol entries, in top-down order (as in TCP/IP).
+
+The protocol descriptor consists of common part and media stream descriptors, each on its line (separated by CR LF). The common part is "*" with a parameter list in parentheses.
+
+If a new version of the PrSD contains new streams, they are appended at the end. Streams are never removed, only direction may be none.
+
+Common parameters are: 
  l - local address (for network or transport protocols),
  l1 - auxillary local address (e.g. RTCP for RTP),
  r - remote address,
  r1 - auxillary remote address,
- b - bandwidth,
+ b - bandwidth (kbps),
  k - encryption key.
  
-Top level protocols (i.e. the first in each stack) is actually a stream major type; it does not define any format or encoding. Common types are audio, video; other registered types are application, control, image, message, text.
-
 Known protocols are:
  rtp (parameter: pt)
  srtp
@@ -26,6 +36,7 @@ Known protocols are:
  ip4
  ip6
  ipx
+ spx
  ipsec
  aal0
  aal1
@@ -33,7 +44,7 @@ Known protocols are:
  aal34
  aal5
  
-In addition, "*" pseudo-stack is used to define global parameters:
+Global parameters defined:
  b (see above)
  s - subject (e.g. conference)
  t - time and repetition
@@ -44,6 +55,7 @@ Example:
 Known subtypes are:
 audio/*
 video/*
+haptic/*
 application/bfcp
 application/l2tp
 image/t38
