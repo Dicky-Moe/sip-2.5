@@ -1,0 +1,9 @@
+ERI (Enhanced Resource Identifier)
+
+Syntax: AOR "(" NAME ")" ROA
+Where: AOR (Address of Record)=URI
+NAME: string, unescaped, but may not contain ")". It could be empty.
+ROA (Roaming Address)=URI. May be empty. FIXME: or could be IPv6 or IPv4 address without packing it into URI?
+IPv6 address starts with "[". It must end with "]". IPv4 address contains no ":". 
+
+Use in 6GTAPI: ERI may be passed as a DialString, its parts are parsed into TAddress properties.

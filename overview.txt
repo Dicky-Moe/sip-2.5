@@ -9,7 +9,7 @@ Extend functionality to H.323 and beyond.
 Add consisitency with HTTP/2.
 
 SIP 2.5 Message:
-Each message consists of parts, separated by the ASCII End-of-text character, and the message itself is terminated by the ASCII End-of-transmission character.
+Each message consists of parts, separated by the ASCII Record Separator character, and the message itself is terminated by the ASCII Group Separator character.
 Discussion: control characters are chosen rather arbitrarily.
 The first part in called the header part. It begins with the version field, followed by OPTIONAL Request-URI. The rest consists of headers.
 Note: the use of the terms "header", "header field" is consistent with HTTP and other protocols, but not SIP 2.0. 
@@ -21,7 +21,7 @@ Request-URI:
 It may be a URI-dictionary-reference, or a valid URI (normally RoA). It is followed by CRLF.
 
 Headers:
-Headers keep syntax and semantics of SIP 2.0 unless removed, or amended, or added by these specifications. It may be also ":status", defined in HTTP/2, or URI-dictionary-entry. The header name may be replaced by compact binary form [SIGCOMP].
+Headers keep syntax and semantics of SIP 2.0 unless removed, or amended, or added by these specifications. It may be also ":status", defined in HTTP/2, or URI-dictionary-entry. The header name may be replaced by the compact binary form [SIGCOMP].
 
 URI-Dictionary:
 SIP naturally reuses the same URI in several headers. To keep a message compact, a dictionary is introduced. Each index is defined as &0...&9. An entry is defined as a header whose name is the index, and whose value is the actual URI. An index is used in header values and the Request-URI where a URI is expected, and is substituted. Implementations MUST provide entries for all indices used, MUST NOT provide unused entries, SHOULD generate entries only if a URI is used at least twice.
