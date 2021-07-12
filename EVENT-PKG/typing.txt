@@ -1,0 +1,5 @@
+The "typing" event-package notifies that a user is typing a message into chat.
+The content-type is text/plain. The content is "1" or "0". It is undefined how a notification races with the actual message sent.
+Details are implementation-specific.
+This event-package does not support implicit subscriptions.
+Users may subscribe to the conference focus, and publish the state to the focus.
