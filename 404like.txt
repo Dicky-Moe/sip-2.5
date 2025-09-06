@@ -1,0 +1,22 @@
+404-Like Codes in SIP & SIP 2.5
+
+This is highly suggested for SIP 2.5, and the best practice for SIP.
+
+181 (with Reason 404): 302 is in process. 
+Don't: 301 should be delivered to the UAC, so the address book remains actual. This is a security issue, however.
+
+301 (with Reason 410 or 404): the address is no longer assigned (and may be assigned to another user), but an alternative address of the same user is known.
+Don't: if the actual address is unknown, use 410.
+Don't: this is permanent condition, do not use for temporary problems, or just the user is offline.
+
+302 (with Reason 404): the user is offline, or there is network congestion.
+
+404: this is just a routing fault. It should not be exposed to the UAC. Instead, an intermediate should re-route the call correctly.
+
+410: The address is no longer valid, and could be assigned to another user in the future.
+Don't: if the new address is known, use 301.
+The difference between 410 and 604 is thin. 
+
+604: The address is wrong. This condition is reported by the authorative domain.
+It applies to both AOR and RoA.
+If the address was assigned in the past - as it is known - 410 could be used.

@@ -1,0 +1,25 @@
+Authentication levels
+=====================
+
+Applicability. This specification is REQUIRED for SIP 2.5, but may be adapted for other protocols (SIP, or even SS7).
+It is implemented by SIP intermediaries, i.e. proxies and B2BUA, for ingress messages, both requests and responses. It works on message-by-message basis.
+Levels for authentication of an ingress message are:
+
+o 0. No authentication.
+If a message cannot be authenticated, it MUST be dropped without further processing. There is no alternative for responses; but for requests there could be an error code. But what's the difference?
+
+o 1. UNI (User-Network interface)
+This level requires:
+oo IP address filtering, or topology restriction, or equivalent router options (VPN?). Note: avoid injecting messages into arbitrary point of the network. Users connect through access network only.
+oo Authentication from underlying transport (e.g. TLS), or HTTP-like (based on password or SIM).
+No trust to P-A-Id; regenerate it from other authentication. Allowed From or To header are defined by accompanying "trust" specification.
+
+o 2. INI (Inter-Network interface)
+This level requires:
+oo IP address filtering (strict whitelist), or topology restriction.
+oo Firewalls
+Underlying transport authentication (TLS with certificates) may be employed.
+P-A-Id is trusted, unless it is clearly spoofed, e.g. as the message is coming from "this" network (domain).
+
+o 3. NNI (Network-to-Network interface)
+This is the highest level. It MUST employ all relevant restrictions, including IP filtering (up to requiring the same subnet), secure transports.

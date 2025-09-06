@@ -1,0 +1,15 @@
+SIP 2.5 USSD
+Note: SIP does not support USSD; W-CDMA or GSM is required. SIP 2.5 can.
+
+As equivalence to USSD, use URIs:
+- sip:ussd@local.invalid (if addressed to the serving network)
+- sip:ussd@home.invalid (if addressed to the home network)
+
+The method is INVITE (if a dialog is expected, or by default) or MESSAGE (if no dialog).
+The content of the request should be text/plain for keyboard input, including * or # based.
+The response is
+- 200 for INVITE, if dialog is established;
+- 200 for MESSAGE;
+- 499 for INVITE, if no dialog.
+The content is text/plain if it is for user display.
+Further messages are INFO requests and responses, and a BYE (possibly empty) is the last.
