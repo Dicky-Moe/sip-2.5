@@ -1,0 +1,45 @@
+Text message format for SIP 2.5 discussion
+==========================================
+
+Contexts: 4xx and 6xx response content, MESSAGE request content, MESSAGE response content (if any), MSRP content.
+This does not apply for streaming text.
+
+Use "text/plain; charset=utf-8" as common denominator, supported by all implementations. Other encodings ("charset") and formats may be negotiated. Encoding need not be IRA (ASCII) compatible.
+
+Teletype control: Use HT, CR LF pair (but switch to Unicode separators if you can), VT. If 7-bit charset is negotiated (e.g. KOI-7), use SI/SO pair.
+It won't make sense to use FF, as messages are normally displayed, not printed.
+Do not use start-of-header, start-of-text, end-of-text, end-of-transmission, as they do not make sense, not because thay conflict with SIP 2.5.
+Do not use BS (it make sense only in streaming text) or other codes.
+
+Computer control: It's only valid code is ESC (as specified in ISO 2022). However, it is context-specific, at least keyboard input vs mouse input (X10 is incompatible with ISO 2022 and UTF-8, although used by T.128) vs display output vs printer control language (PCL) and printer job language (PJL). Unless its usage can be negotiated, do not use it either.
+
+C1 control: in UTF-8, they formally appear as 0xC2 0xNN. However, for simplicity, 0xC2 may be omitted.
+
+Emoji. Emoji-Presentation character must not be followed by VS-16, although Unicode standard prose is vague. These characters may be followed by VS-15 to enforce text presentation, but in that case, a tag nor ZWJ at either side may not appear.
+Author in unaware of any implementation which makes sense from VS-16. Emoji supporting implementations show emoji anyway, the rest of implementations shows text anyway.
+
+Conversely, Emoji but not Emoji-Presentation characters must appear as text by default, unless followed by VS-16, or (for those 2 that are Emoji-Modifier-Base) by Emoji-Modifier.
+
+Tags (U+E0020...U+E007F) are only useful with emoji; earlier usage as language tags is no longer part of Unicode. By earlier drafts, the sequence is base emoji (possibly with VS or modifier, but currently none), tag name of 0 or more (U+E0041...U+E005A) (currently, empty, but there are propositions), tag value of one or more (U+E0061...U+E007A or U+E0030...U+E0039), end U+E007F. The "tag name" part determines the nature of the tag, more than emoji itself (which is fallback). There were 3 propositions, none of them approved. Currently, only empty name approved for sub-country flags. There is also suggestion for families. The tag value is interpreted according to the tag name.
+
+Emoticons (such as :-) or (_Y_) ) should appear as such, no conversion to emoji (even standard). If author wishes, convert them at input. This does not appply if the charset is restricted.
+
+Emotons. This is name for :smiling_cat: sequences. Standard ones (which?) must be converted to emoji before transmission. Others may appear.
+
+Use negotiated private codes (possibly as emoji) as implementation-specific.
+
+Do not use non-characters and sentinels.
+
+text/html
+=========
+
+Use this when markup is needed, e.g. bold text, pictures (not emoji) etc. There are more restrictions for characters in use (no subscript, superscript, line separator, paragraph separator, some control codes etc.) Use elements instead. Also, the message must be self-contained, with styles and pictures inline.
+
+image/png, image/jpeg
+=====================
+
+Use if the message is just a picture, no text (or it is pre-rendered). Other formats may be negotiated.
+
+audio/?
+=======
+For voice messages
