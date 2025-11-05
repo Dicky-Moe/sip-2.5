@@ -36,9 +36,9 @@ Tags (U+E0020...U+E007F) are only useful with emoji; earlier usage as language t
 
 Emoticons (such as :-) or (_Y_) ) should appear as such, no conversion to emoji (even standard). If the author wishes, convert them at input. This does not appply if the charset is restricted.
 
-Emotons. This is name for :smiling_cat: sequences.
+Emotons. This is name for :smiling_cat: etc. sequences.
 TODO: give some formal definition, reference General_Category (might be written in other languages, say, Russian).
-Emotons are implementation-specific. TODO: define precondition: if the target encoding supports emoji, then translate the emoton. In that case, the emoton is INVALID. The target emoji can be an implementation-specific ZWJ sequence. However, an emoton is valid if it cannot be translated.
+Emotons are implementation-specific. TODO: define precondition: if the target encoding supports emoji, then translate the emoton into an emoji. In that case, the emoton is INVALID. The target emoji can be an implementation-specific ZWJ sequence. However, an emoton is valid if it cannot be translated.
 
 Use negotiated private codes (possibly as emoji) as implementation-specific.
 
@@ -49,7 +49,7 @@ text/html
 
 Use this when markup is needed, e.g. bold text, pictures (not emoji) etc. There are more restrictions for characters in use (no subscript, superscript, line separator, paragraph separator, some control codes etc.) Use elements instead. Also, the message must be self-contained, with styles and pictures inline.
 
-A style may force a character to appear as an emoji, even it has no Emoji property. This applies, generally, to grapheme clusters. However, VS15 always has higher priority. Implementations should use fonts to select different images for the same character. For instance, FEMALE SIGN (actually refers to Venus) may appear as an astronomical sign (common), view of the planet (if there is a font named "Planets"), or erotic picture of the goddess (if there is a font named "Erotica").
+Unicode defines language tags to enforce emoji presentation. E.g. <span lang="und-u-em-emoji">&#...;</span>. This has lower priority than VS, but higher than EPres. However, this document defines interaction between properties and VS with potentially undesired effects. (For instance, the language tag is und-u-em-text, the codepoint has EPres, followed by VS16. According to the above, VS16 is invalid and is ignored, so the resulting presentation is text.) Also, this can display non-Emoji characters (symbols and pictograms) as emoji; there are few implementations that display some non-Emoji characters as emoji. In addition, implementations may use fonts to select different images for the same character. For instance, FEMALE SIGN (actually refers to Venus) may appear as an astronomical sign (common), view of the planet (if there is a font named "Planets"), or erotic picture of the goddess (if there is a font named "Erotica").
 
 image/png, image/jpeg
 =====================
