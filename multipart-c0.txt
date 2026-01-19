@@ -1,0 +1,7 @@
+This specification defines IRA (ASCII) control codes (C0) for multipart data units, as a simpler alternative to MIME.
+
+The basic data unit is message. For HTTP-like protocol, like SIP 2.5, it is a request or a response.
+Each message consists of one or more parts. All parts, except the first, could be "text" or "binary", and may have metadata. The first part is always text and has no metadata.
+In an encoded message, part header is separated from that part body by RS (0x1E) character, if it is present. Parts are separated from each other by GS (0x1D) character. The message is terminated by FS (0x1C) character. The same for binary parts, size of each part is determined by a context (normally in the first part), control codes defined here do not count.
+
+What is "text", then? Traditionally, this means a data unit with restricted use of some bytes (control codes) and some sequences.

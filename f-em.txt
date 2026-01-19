@@ -1,0 +1,20 @@
+Forced Emoji Context
+
+Definition: use language tag i.e. lang=und-u-em-emoji. This allows to use emoji presentation with characters and sequences uncontroversially with CSS spec.
+In that context, do not add VS15 nor VS16; they may have undesired effects, depending on the implementation.
+
+Examples.
+
+1. Codepoint with Emoji=No
+There are implementations that still show an emoji. We suggest to make it explicit. Note: VS15 and VS16 should have no effect since they are defined for Emoji=Yes only.
+
+2. Grapheme clusters
+The most impressive example is U+20E3, yet all U+20D0...U+20F0 fit. Note that sometimes (e.g. in books) to show a keycap as text, yet any keycap might appear as emoji. 
+However, it is not possible to combine several letters into one keycap (for instance, [Esc]). One might use U+2300 range for keyboard symbols (e.g. U+238B U+20E3 sequence for [Esc]), but show a key according to the current language, as [Esc] in English, [Echap] in French etc. or a symbol if undefined language.
+Also, U+20E0 and U+20E4 for European-style road signs. TODO are they the same as American-style?
+A weird approach would be to attach a keycap symbol to a text run, but this doesn't seem to agree with Unicode, HTML, CSS specs.
+
+3. ZWJ sequences
+[codepoint1 <ZWJ> codepoint2] or more in the context.
+It applies even codepoint2 is Emoji=No etc. Known example is realistic pictures of planets as proposed to the UTC. More planets, dwarf planets and asteroids could be added e.g. Huya with U+1F310 U+200D U+2614 (it is named after a rain god, so the rain is an appropriate symbol).
+One more suggestion is personification; even [<WOMAN><ZWJ><NATIONAL PARK>] display as nymphs (they are personifications of rivers and woods).
