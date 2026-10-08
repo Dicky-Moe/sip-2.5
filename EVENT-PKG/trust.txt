@@ -1,0 +1,8 @@
+This specification defines "trust" behaviour, i.e. when From: header displays a user different from who actually started the communication.
+Terms:
+Assumed identity (sm)
+Asserted identity (rt)
+
+The event-package is very special, as it doesn't support subscriptions, it is not allowed in SUBSCRIBE and NOTIFY requests.
+The only use is in the PUBLISH request.
+The PUBLISH request establishes a trust relationship. From-URI is sm, and To-URI is rt. Whether this request is itself transitive TBD.

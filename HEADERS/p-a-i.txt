@@ -1,0 +1,4 @@
+P-Asserted-Identity
+
+The same as for SIP. In particular, user SHOULD NOT generate this header.
+See also accompanying auth_lvl.

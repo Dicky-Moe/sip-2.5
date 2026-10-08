@@ -1,0 +1,4 @@
+P-Served-User
+
+The same as for SIP.
+Normally added at the last hop before the UA and ignored by it.
